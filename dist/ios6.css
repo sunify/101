@@ -299,6 +299,9 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
 /* Align the score rows to the paper ruling: 32px per line. */
 .score-sheet {
   --paper-rule: 32px;
+  --score-column: 44px;
+  --action-column: 136px;
+  --row-gap: 9px;
   padding-top: 0;
   background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--paper-rule) - 1px), rgba(94,147,190,.24) calc(var(--paper-rule) - 1px), rgba(94,147,190,.24) var(--paper-rule));
 }
@@ -341,9 +344,9 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
 /* One ruled line per player: identity, total and the current action. */
 .player-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) var(--score-column) var(--action-column);
   grid-template-areas: "person total action";
-  column-gap: 9px;
+  column-gap: var(--row-gap);
   height: var(--paper-rule);
   min-height: var(--paper-rule);
 }
@@ -353,13 +356,13 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
   background: transparent; box-shadow: none; font-size: 19px;
 }
 .player-identity strong { font-size: 13px; }
-.player-total { grid-area: total; display: flex; align-items: baseline; white-space: nowrap; }
+.player-total { grid-area: total; display: flex; align-items: baseline; justify-content: flex-end; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .total-score { font-size: 18px; }
 .score-label { font-size: 7px; }
 .recent-scores { display: none; }
 .player-card > .player-action,
 .player-card > .winner-actions,
-.player-card > .round-score { grid-area: action; }
+.player-card > .round-score { grid-area: action; justify-self: end; }
 .player-action { width: 78px; min-height: 25px; height: 25px; padding: 0 7px; font-size: 10px; }
 .winner-actions { grid-template-columns: 54px 38px 38px; gap: 3px; }
 .winner-label { min-height: 25px; height: 25px; padding: 0 4px; font-size: 9px; }
@@ -371,16 +374,26 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
 
 /* The leader is the handwritten-looking summary below a strong total line. */
 .score-sheet .leader-card {
-  height: var(--paper-rule); min-height: var(--paper-rule); margin: 0; padding: 0 4px;
-  border-top: 3px solid #3d4854; border-bottom: 0; background: transparent; box-shadow: none;
+  position: relative; display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--score-column) var(--action-column);
+  column-gap: var(--row-gap); align-items: center;
+  height: var(--paper-rule); min-height: var(--paper-rule); margin: var(--paper-rule) 0 0; padding: 0 4px;
+  border: 0; background: transparent; box-shadow: none;
 }
+.score-sheet .leader-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: calc(var(--paper-rule) / -2);
+  height: 3px; border-radius: 2px; background: #3d4854; box-shadow: 0 1px rgba(255,255,255,.65);
+}
+.leader-person { min-width: 0; display: flex; align-items: center; gap: 7px; }
+.leader-person > span:last-child { min-width: 0; display: grid; }
 .score-sheet .leader-emoji { width: 25px; height: 25px; border: 0; background: transparent; box-shadow: none; }
 .score-sheet .leader-card small { font-size: 8px; letter-spacing: .12em; }
 .score-sheet .leader-card strong { margin: 0; font-size: 13px; }
-.score-sheet .leader-card > b { font-size: 18px; }
+.score-sheet .leader-card > b { grid-column: 2; justify-self: end; font-size: 18px; font-variant-numeric: tabular-nums; }
 
 @media (max-width: 650px) {
-  .player-card { height: var(--paper-rule); min-height: var(--paper-rule); column-gap: 5px; }
+  .score-sheet { --score-column: 40px; --action-column: 111px; --row-gap: 5px; }
+  .player-card { height: var(--paper-rule); min-height: var(--paper-rule); }
   .player-emoji { width: 24px; height: 24px; font-size: 18px; }
   .player-identity strong { font-size: 12px; }
   .total-score { font-size: 17px; }
@@ -394,7 +407,7 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
 }
 
 @media (max-width: 370px) {
-  .player-card { column-gap: 3px; }
+  .score-sheet { --score-column: 38px; --action-column: 95px; --row-gap: 3px; }
   .player-emoji { width: 21px; font-size: 16px; }
   .player-identity strong { font-size: 11px; }
   .total-score { font-size: 16px; }
