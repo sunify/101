@@ -196,3 +196,102 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
   .winner-actions { grid-template-columns: 1fr 54px 54px; }
   .queen-exit { min-width: 0; padding: 0 5px; }
 }
+
+/* Compact score sheet */
+.game-head { padding: 24px 0 14px; }
+.game-head h1 { font-size: clamp(30px, 4.5vw, 42px); }
+.game-head p { margin-top: 6px; font-size: 14px; }
+.score-sheet {
+  position: relative; max-width: 760px; margin: 0 auto 22px; padding: 16px 18px 16px 48px;
+  border: 1px solid #b3a98f; border-radius: 3px;
+  background-color: #fffdf3;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(94,147,190,.22) 31px, rgba(94,147,190,.22) 32px);
+  box-shadow: 0 2px 3px rgba(0,0,0,.28), 0 8px 22px rgba(38,43,49,.18), inset 0 1px #fff;
+  transform: rotate(-.08deg);
+}
+.score-sheet::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 35px; width: 1px;
+  background: rgba(205,91,91,.42); box-shadow: 3px 0 rgba(205,91,91,.12);
+}
+.sheet-caption { display: flex; align-items: center; justify-content: space-between; height: 26px; margin-bottom: 5px; color: #706a5b; font: italic 15px/1.2 Georgia, serif; }
+.sheet-caption small { font: 700 10px/1 "Helvetica Neue",sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.score-sheet .leader-card {
+  margin: 3px 0 7px; padding: 7px 10px; border-radius: 7px; box-shadow: inset 0 1px rgba(255,255,255,.65), 0 1px 2px rgba(0,0,0,.2);
+}
+.score-sheet .leader-emoji { width: 34px; height: 34px; font-size: 21px; }
+.score-sheet .leader-card > b { font-size: 20px; }
+.players-grid { display: block; }
+.player-card {
+  display: grid; grid-template-columns: minmax(0,1fr) auto; grid-template-rows: auto auto;
+  grid-template-areas: "person action" "history action"; align-items: center; column-gap: 12px;
+  min-height: 64px; padding: 7px 4px; border: 0; border-bottom: 1px dashed rgba(81,103,125,.42); border-radius: 0;
+  background: transparent; box-shadow: none;
+}
+.player-card:last-child { border-bottom: 0; }
+.player-card::before { display: none; }
+.player-card.winner { border-color: rgba(71,121,79,.48); background: linear-gradient(90deg, rgba(207,235,210,.58), rgba(207,235,210,.08)); box-shadow: none; }
+.player-top { grid-area: person; gap: 9px; }
+.player-emoji { width: 38px; height: 38px; border-radius: 8px; font-size: 23px; }
+.player-identity strong { font-size: 15px; }
+.player-identity small { display: flex; align-items: baseline; margin-top: 0; }
+.total-score { font-size: 21px; line-height: 1; }
+.score-label { font-size: 8px; }
+.recent-scores { grid-area: history; min-height: 17px; height: 17px; margin: 2px 0 0 47px; gap: 4px; }
+.score-chip { min-width: 20px; height: 17px; padding: 0 5px; border-radius: 5px; font-size: 9px; }
+.no-history { font-size: 9px; line-height: 17px; }
+.player-card > .player-action, .player-card > .winner-actions, .player-card > .round-score { grid-area: action; align-self: center; }
+.player-action { width: 112px; min-height: 36px; padding: 0 10px; font-size: 12px; }
+.photo-button::before { margin-right: 5px; }
+.winner-actions { grid-template-columns: 82px 46px 46px; gap: 5px; }
+.winner-label { min-height: 36px; padding: 0 6px; font-size: 12px; }
+.winner-label span { width: 18px; height: 18px; font-size: 10px; }
+.queen-exit { min-width: 46px; min-height: 36px; padding: 0 4px; font-size: 12px; }
+.round-score { width: 120px; min-height: 36px; padding: 0 7px 0 10px; }
+.round-score strong { font-size: 12px; }
+.round-score button { font-size: 9px; }
+.score-sheet .round-ready { margin-top: 9px; padding: 10px; border-radius: 8px; }
+.score-sheet .round-ready > div { grid-template-columns: 28px auto; column-gap: 8px; }
+.score-sheet .round-ready > div > span { width: 28px; height: 28px; }
+.score-sheet .round-ready strong { font-size: 13px; }
+.score-sheet .round-ready small { font-size: 9px; }
+.score-sheet .round-ready .primary-button { padding: 9px 12px; font-size: 11px; }
+
+@media (max-width: 650px) {
+  .topbar { height: 58px; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 8px; }
+  .brand b { font-size: 14px; }
+  .brand small { font-size: 9px; }
+  .icon-button { width: 34px; height: 34px; }
+  .avatar-stack span { width: 28px; height: 28px; font-size: 15px; }
+  .game-head { padding: 17px 0 11px; }
+  .game-head h1 { margin-top: 4px; font-size: 27px; }
+  .game-head p { max-width: 270px; margin-top: 4px; font-size: 11px; line-height: 1.3; }
+  .quiet-button { padding: 7px 9px; font-size: 10px; }
+  .score-sheet { margin: 0 -3px 16px; padding: 10px 9px 10px 35px; }
+  .score-sheet::before { left: 27px; }
+  .sheet-caption { height: 20px; margin: 0; font-size: 13px; }
+  .score-sheet .leader-card { margin-bottom: 4px; padding: 5px 8px; }
+  .score-sheet .leader-emoji { width: 30px; height: 30px; font-size: 19px; }
+  .player-card { min-height: 57px; padding: 5px 2px; column-gap: 7px; }
+  .player-emoji { width: 34px; height: 34px; font-size: 21px; }
+  .player-identity strong { font-size: 13px; }
+  .total-score { font-size: 18px; }
+  .recent-scores { margin-left: 43px; }
+  .recent-scores .score-chip:nth-of-type(n+4) { display: none; }
+  .player-action { width: 96px; min-height: 34px; font-size: 11px; }
+  .winner-actions { grid-template-columns: 67px 42px 42px; gap: 4px; }
+  .winner-label { min-height: 34px; padding: 0 4px; font-size: 11px; }
+  .winner-label span { display: none; }
+  .queen-exit { min-width: 42px; min-height: 34px; }
+  .history-section { margin-top: 32px; }
+}
+
+@media (max-width: 370px) {
+  .game-head h1 { font-size: 25px; }
+  .player-card { column-gap: 4px; }
+  .player-emoji { width: 31px; height: 31px; }
+  .player-action { width: 88px; padding: 0 5px; }
+  .winner-actions { grid-template-columns: 58px 38px 38px; }
+  .winner-label { font-size: 10px; }
+  .queen-exit { min-width: 38px; font-size: 11px; }
+}

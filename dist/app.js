@@ -57,6 +57,7 @@ function render() {
   const roundNumber = game.rounds.length + 1;
   const winner = players.find(player => player.id === game.current.winnerId);
   $("#roundLabel").textContent = `Раунд ${roundNumber}`;
+  $("#sheetRoundLabel").textContent = `Раунд ${roundNumber}`;
   $("#gameTitle").textContent = winner ? `${winner.name} вышел${winner.name.endsWith("а") ? "а" : ""}` : "Кто вышел?";
   $("#gameHint").textContent = winner ? "Теперь сфотографируйте оставшиеся карты каждого игрока." : "Отметьте победителя раунда — у остальных появится кнопка фото.";
   els.playersButton.innerHTML = players.slice(0,4).map(player => `<span>${player.emoji}</span>`).join("");
@@ -76,9 +77,9 @@ function render() {
         const winnerScore = Number(game.current.scores[player.id]) || 0;
         action = `<div class="winner-actions"><div class="winner-label"><span>✓</span> Вышел${winnerScore ? ` · ${winnerScore}` : ""}</div><button class="queen-exit${winnerScore === -20 ? " selected" : ""}" data-winner-score="-20" data-player="${player.id}" type="button" aria-label="Вышел с дамы, минус 20">−20</button><button class="queen-exit${winnerScore === -40 ? " selected" : ""}" data-winner-score="-40" data-player="${player.id}" type="button" aria-label="Вышел с пиковой дамы, минус 40">−40</button></div>`;
       }
-      else if (processingPlayerId === player.id) action = `<button class="player-action photo-button" disabled>Распознаю фото…</button>`;
+      else if (processingPlayerId === player.id) action = `<button class="player-action photo-button" disabled>Считаю…</button>`;
       else if (hasScore) action = `<div class="round-score"><strong>+${game.current.scores[player.id]} очков</strong><button data-photo="${player.id}" type="button">Исправить</button></div>`;
-      else action = `<button class="player-action photo-button" data-photo="${player.id}" type="button">Прикрепить фото карт</button>`;
+      else action = `<button class="player-action photo-button" data-photo="${player.id}" type="button">Фото карт</button>`;
     }
     card.innerHTML = `<div class="player-top"><span class="player-emoji">${player.emoji}</span><div class="player-identity"><strong>${escapeHtml(player.name)}</strong><small><span class="total-score">${total}</span><span class="score-label">очков</span></small></div></div><div class="recent-scores">${recent}</div>${action}`;
     els.playersGrid.append(card);
