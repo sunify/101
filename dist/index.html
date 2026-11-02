@@ -31,7 +31,7 @@
               <span></span>
             </div>
             <strong>Добавьте фотографию</strong>
-            <small>Лучше сверху, чтобы были видны углы карт</small>
+            <small>Лучше сверху, чтобы были видны углы карт · обработка на устройстве</small>
             <div class="upload-actions">
               <label class="primary-button" for="cameraInput">Снять фото</label>
               <label class="secondary-button" for="fileInput">Выбрать файл</label>
@@ -97,7 +97,7 @@
         </section>
       </main>
 
-      <footer><span>101 · игровой помощник</span><span>Фото обрабатывается в браузере</span></footer>
+      <footer><span>101 · игровой помощник</span><span>Фото обрабатывается в браузере · <a href="https://huggingface.co/sroot/lgd-cards-gen3" target="_blank" rel="noreferrer">открытая модель</a></span></footer>
     </div>
 
     <dialog id="rulesDialog">
@@ -116,6 +116,7 @@
     </dialog>
 
     <div class="toast" id="toast" role="status"></div>
+    <script src="./vendor/onnxruntime/ort.wasm.min.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
