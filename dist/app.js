@@ -73,7 +73,7 @@ function render() {
         action = `<div class="winner-actions"><div class="winner-label"><span>✓</span> Вышел</div><button class="queen-exit${winnerScore === -20 ? " selected" : ""}" data-winner-score="-20" data-player="${player.id}" type="button" aria-label="Вышел с дамы, минус 20">−20</button><button class="queen-exit${winnerScore === -40 ? " selected" : ""}" data-winner-score="-40" data-player="${player.id}" type="button" aria-label="Вышел с пиковой дамы, минус 40">−40</button></div>`;
       }
       else if (processingPlayerId === player.id) action = `<button class="player-action photo-button" disabled>Считаю…</button>`;
-      else if (hasScore) action = `<div class="round-score"><strong>+${game.current.scores[player.id]} очков</strong><button data-photo="${player.id}" type="button">Исправить</button></div>`;
+      else if (hasScore) action = `<button class="round-score" data-photo="${player.id}" type="button" aria-label="Переснять карты и изменить очки"><strong>+${game.current.scores[player.id]} очков</strong></button>`;
       else action = `<button class="player-action photo-button" data-photo="${player.id}" type="button">Фото</button>`;
     }
     card.innerHTML = `<div class="player-top"><span class="player-emoji">${player.emoji}</span><div class="player-identity"><strong>${escapeHtml(player.name)}</strong></div></div><div class="player-total"><span class="total-score">${total}</span><span class="score-label">очков</span></div>${action}`;

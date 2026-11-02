@@ -371,7 +371,7 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
 .queen-exit { min-width: 38px; min-height: 25px; height: 25px; padding: 0 3px; font-size: 10px; }
 .round-score { width: 84px; min-height: 25px; height: 25px; padding: 0 5px 0 7px; }
 .round-score strong { font-size: 10px; }
-.round-score button { font-size: 8px; }
+.round-score { white-space: nowrap; cursor: pointer; }
 
 /* The leader is the handwritten-looking summary below a strong total line. */
 .score-sheet .leader-card {
