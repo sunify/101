@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#173f32" />
+    <meta name="description" content="Прототип подсчёта очков по фото карт для игры 101" />
+    <title>Счёт карт · 101</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Счёт карт 101">
+          <span class="brand-mark">101</span>
+          <span>Счёт карт</span>
+        </a>
+        <button class="rules-button" id="rulesButton" type="button" aria-expanded="false">Правила</button>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow"><i></i> Прототип распознавания</span>
+            <h1>Сфотографируйте карты.<br /><em>Счёт готов.</em></h1>
+            <p>Загрузите снимок, проверьте найденные карты и сразу получите сумму для партии в 101.</p>
+          </div>
+
+          <div class="upload-card" id="dropZone">
+            <div class="camera-icon" aria-hidden="true">
+              <span></span>
+            </div>
+            <strong>Добавьте фотографию</strong>
+            <small>Лучше сверху, чтобы были видны углы карт</small>
+            <div class="upload-actions">
+              <label class="primary-button" for="cameraInput">Снять фото</label>
+              <label class="secondary-button" for="fileInput">Выбрать файл</label>
+            </div>
+            <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
+            <input id="fileInput" type="file" accept="image/*,.dng" hidden />
+          </div>
+        </section>
+
+        <section class="examples" aria-labelledby="examplesTitle">
+          <div class="section-heading">
+            <div>
+              <span class="section-kicker">Быстрая проверка</span>
+              <h2 id="examplesTitle">Ваши примеры</h2>
+            </div>
+            <span class="swipe-hint">нажмите на фото</span>
+          </div>
+          <div class="example-grid" id="exampleGrid"></div>
+        </section>
+
+        <section class="workspace" id="workspace" hidden aria-live="polite">
+          <div class="photo-panel">
+            <div class="panel-topline">
+              <span class="status"><i></i><span id="statusText">Фото разобрано</span></span>
+              <button id="replaceButton" class="text-button" type="button">Заменить фото</button>
+            </div>
+            <div class="photo-frame">
+              <img id="photoPreview" alt="Загруженные карты" />
+              <div class="scan-line" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="result-panel">
+            <div class="score-header">
+              <div>
+                <span class="section-kicker">Итого</span>
+                <div class="score"><span id="totalScore">0</span><small>очков</small></div>
+              </div>
+              <div class="card-count"><b id="cardCount">0</b><span id="cardWord">карт</span></div>
+            </div>
+
+            <div class="notice" id="notice" hidden></div>
+
+            <div class="detected-heading">
+              <h3>Найденные карты</h3>
+              <span>можно исправить</span>
+            </div>
+            <div class="cards-list" id="cardsList"></div>
+            <button class="add-card" id="addCardButton" type="button"><span>＋</span> Добавить карту</button>
+
+            <div class="formula" id="formula"></div>
+            <button class="done-button" id="doneButton" type="button">Готово, записать счёт</button>
+          </div>
+        </section>
+
+        <section class="how-it-works">
+          <span class="section-kicker">Как это работает</span>
+          <div class="steps">
+            <article><b>01</b><h3>Фото</h3><p>Разложите карты так, чтобы были видны обозначения в углах.</p></article>
+            <article><b>02</b><h3>Проверка</h3><p>Сверьте распознанные номиналы и масти, поправьте при необходимости.</p></article>
+            <article><b>03</b><h3>Счёт</h3><p>Получите сумму по правилам игры, включая особую даму.</p></article>
+          </div>
+        </section>
+      </main>
+
+      <footer><span>101 · игровой помощник</span><span>Фото обрабатывается в браузере</span></footer>
+    </div>
+
+    <dialog id="rulesDialog">
+      <button class="dialog-close" id="dialogClose" aria-label="Закрыть">×</button>
+      <span class="section-kicker">Правила подсчёта</span>
+      <h2>Сколько стоит карта</h2>
+      <div class="rules-grid">
+        <span><b>6–8, 10</b><small>по номиналу</small></span>
+        <span><b>9</b><small>0 очков</small></span>
+        <span><b>В</b><small>2 очка</small></span>
+        <span><b>Д</b><small>3 очка</small></span>
+        <span><b>К</b><small>4 очка</small></span>
+        <span><b>Т</b><small>11 очков</small></span>
+      </div>
+      <p class="queen-rule"><span>♠</span><b>Если осталась одна дама:</b> пиковая стоит 40 очков, любая другая — 20.</p>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
