@@ -72,7 +72,10 @@ function render() {
     const recent = history.length ? history.slice(-6).map(value => `<span class="score-chip${value === 0 ? " zero" : ""}">${value}</span>`).join("") : `<span class="no-history">Пока без записей</span>`;
     let action = `<button class="player-action exit-button" data-exit="${player.id}" type="button">Вышел</button>`;
     if (winner) {
-      if (isWinner) action = `<div class="winner-label"><span>✓</span> Вышел · 0</div>`;
+      if (isWinner) {
+        const winnerScore = Number(game.current.scores[player.id]) || 0;
+        action = `<div class="winner-actions"><div class="winner-label"><span>✓</span> Вышел${winnerScore ? ` · ${winnerScore}` : ""}</div><button class="queen-exit${winnerScore === -20 ? " selected" : ""}" data-winner-score="-20" data-player="${player.id}" type="button" aria-label="Вышел с дамы, минус 20">−20</button><button class="queen-exit${winnerScore === -40 ? " selected" : ""}" data-winner-score="-40" data-player="${player.id}" type="button" aria-label="Вышел с пиковой дамы, минус 40">−40</button></div>`;
+      }
       else if (processingPlayerId === player.id) action = `<button class="player-action photo-button" disabled>Распознаю фото…</button>`;
       else if (hasScore) action = `<div class="round-score"><strong>+${game.current.scores[player.id]} очков</strong><button data-photo="${player.id}" type="button">Исправить</button></div>`;
       else action = `<button class="player-action photo-button" data-photo="${player.id}" type="button">Прикрепить фото карт</button>`;
@@ -83,6 +86,7 @@ function render() {
 
   document.querySelectorAll("[data-exit]").forEach(button => button.addEventListener("click", () => selectWinner(button.dataset.exit)));
   document.querySelectorAll("[data-photo]").forEach(button => button.addEventListener("click", () => requestPhoto(button.dataset.photo)));
+  document.querySelectorAll("[data-winner-score]").forEach(button => button.addEventListener("click", () => setWinnerScore(button.dataset.player, Number(button.dataset.winnerScore))));
   els.roundReady.hidden = !currentComplete();
   renderLeader();
   renderHistory();
@@ -111,6 +115,12 @@ function selectWinner(playerId) {
   if (game.current.winnerId) return;
   game.current.winnerId = playerId;
   game.current.scores = {[playerId]:0};
+  render();
+}
+
+function setWinnerScore(playerId, value) {
+  if (game.current.winnerId !== playerId) return;
+  game.current.scores[playerId] = game.current.scores[playerId] === value ? 0 : value;
   render();
 }
 
