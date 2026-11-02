@@ -293,4 +293,5 @@ $("#newGameButton").addEventListener("click",newGame);
 $("#toggleHistoryButton").addEventListener("click",event=>{const wrap=$("#historyWrap"),hidden=wrap.hidden;wrap.hidden=!hidden;event.currentTarget.textContent=hidden?"Свернуть":"Развернуть";event.currentTarget.setAttribute("aria-expanded",String(hidden))});
 
 render();
+ensureModel().catch(() => {});
 if(firstVisit)setTimeout(editPlayers,250);
