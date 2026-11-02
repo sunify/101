@@ -337,3 +337,70 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
   content: ""; position: absolute; left: -7px; top: 8px; bottom: 8px; width: 3px;
   border-radius: 2px; background: #4f9259; box-shadow: inset 1px 0 rgba(255,255,255,.45);
 }
+
+/* One ruled line per player: identity, total and the current action. */
+.player-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas: "person total action";
+  column-gap: 9px;
+  height: var(--paper-rule);
+  min-height: var(--paper-rule);
+}
+.player-top { grid-area: person; min-width: 0; gap: 7px; }
+.player-emoji {
+  width: 27px; height: 27px; border: 0; border-radius: 0;
+  background: transparent; box-shadow: none; font-size: 19px;
+}
+.player-identity strong { font-size: 13px; }
+.player-total { grid-area: total; display: flex; align-items: baseline; white-space: nowrap; }
+.total-score { font-size: 18px; }
+.score-label { font-size: 7px; }
+.recent-scores { display: none; }
+.player-card > .player-action,
+.player-card > .winner-actions,
+.player-card > .round-score { grid-area: action; }
+.player-action { width: 78px; min-height: 25px; height: 25px; padding: 0 7px; font-size: 10px; }
+.winner-actions { grid-template-columns: 54px 38px 38px; gap: 3px; }
+.winner-label { min-height: 25px; height: 25px; padding: 0 4px; font-size: 9px; }
+.winner-label span { display: none; }
+.queen-exit { min-width: 38px; min-height: 25px; height: 25px; padding: 0 3px; font-size: 10px; }
+.round-score { width: 84px; min-height: 25px; height: 25px; padding: 0 5px 0 7px; }
+.round-score strong { font-size: 10px; }
+.round-score button { font-size: 8px; }
+
+/* The leader is the handwritten-looking summary below a strong total line. */
+.score-sheet .leader-card {
+  height: var(--paper-rule); min-height: var(--paper-rule); margin: 0; padding: 0 4px;
+  border-top: 3px solid #3d4854; border-bottom: 0; background: transparent; box-shadow: none;
+}
+.score-sheet .leader-emoji { width: 25px; height: 25px; border: 0; background: transparent; box-shadow: none; }
+.score-sheet .leader-card small { font-size: 8px; letter-spacing: .12em; }
+.score-sheet .leader-card strong { margin: 0; font-size: 13px; }
+.score-sheet .leader-card > b { font-size: 18px; }
+
+@media (max-width: 650px) {
+  .player-card { height: var(--paper-rule); min-height: var(--paper-rule); column-gap: 5px; }
+  .player-emoji { width: 24px; height: 24px; font-size: 18px; }
+  .player-identity strong { font-size: 12px; }
+  .total-score { font-size: 17px; }
+  .score-label { display: none; }
+  .player-action { width: 67px; }
+  .winner-actions { grid-template-columns: 39px 34px 34px; gap: 2px; }
+  .winner-label { padding: 0 2px; font-size: 8px; }
+  .queen-exit { min-width: 34px; width: 34px; }
+  .round-score { width: 74px; }
+  .score-sheet .round-ready { margin-top: var(--paper-rule); }
+}
+
+@media (max-width: 370px) {
+  .player-card { column-gap: 3px; }
+  .player-emoji { width: 21px; font-size: 16px; }
+  .player-identity strong { font-size: 11px; }
+  .total-score { font-size: 16px; }
+  .player-action { width: 58px; padding: 0 3px; font-size: 9px; }
+  .winner-actions { grid-template-columns: 31px 30px 30px; }
+  .winner-label { font-size: 7px; }
+  .queen-exit { min-width: 30px; width: 30px; font-size: 9px; }
+  .round-score { width: 67px; }
+}
