@@ -68,17 +68,17 @@ function render() {
     const isWinner = game.current.winnerId === player.id;
     const hasScore = game.current.scores[player.id] !== undefined;
     const card = document.createElement("article");
-    card.className = `player-card${isWinner ? " winner" : ""}${processingPlayerId === player.id ? " processing" : ""}`;
+    card.className = `player-card nes-container${isWinner ? " winner" : ""}${processingPlayerId === player.id ? " processing" : ""}`;
     const recent = history.length ? history.slice(-6).map(value => `<span class="score-chip${value === 0 ? " zero" : ""}">${value}</span>`).join("") : `<span class="no-history">Пока без записей</span>`;
-    let action = `<button class="player-action exit-button" data-exit="${player.id}" type="button">Вышел</button>`;
+    let action = `<button class="player-action exit-button nes-btn" data-exit="${player.id}" type="button">Вышел</button>`;
     if (winner) {
       if (isWinner) {
         const winnerScore = Number(game.current.scores[player.id]) || 0;
-        action = `<div class="winner-actions"><div class="winner-label"><span>✓</span> Вышел${winnerScore ? ` · ${winnerScore}` : ""}</div><button class="queen-exit${winnerScore === -20 ? " selected" : ""}" data-winner-score="-20" data-player="${player.id}" type="button" aria-label="Вышел с дамы, минус 20">−20</button><button class="queen-exit${winnerScore === -40 ? " selected" : ""}" data-winner-score="-40" data-player="${player.id}" type="button" aria-label="Вышел с пиковой дамы, минус 40">−40</button></div>`;
+        action = `<div class="winner-actions"><div class="winner-label"><span>✓</span> Вышел${winnerScore ? ` · ${winnerScore}` : ""}</div><button class="queen-exit nes-btn is-error${winnerScore === -20 ? " selected" : ""}" data-winner-score="-20" data-player="${player.id}" type="button" aria-label="Вышел с дамы, минус 20">−20</button><button class="queen-exit nes-btn is-error${winnerScore === -40 ? " selected" : ""}" data-winner-score="-40" data-player="${player.id}" type="button" aria-label="Вышел с пиковой дамы, минус 40">−40</button></div>`;
       }
-      else if (processingPlayerId === player.id) action = `<button class="player-action photo-button" disabled>Распознаю фото…</button>`;
+      else if (processingPlayerId === player.id) action = `<button class="player-action photo-button nes-btn is-primary" disabled>Распознаю фото…</button>`;
       else if (hasScore) action = `<div class="round-score"><strong>+${game.current.scores[player.id]} очков</strong><button data-photo="${player.id}" type="button">Исправить</button></div>`;
-      else action = `<button class="player-action photo-button" data-photo="${player.id}" type="button">Прикрепить фото карт</button>`;
+      else action = `<button class="player-action photo-button nes-btn is-primary" data-photo="${player.id}" type="button">Прикрепить фото карт</button>`;
     }
     card.innerHTML = `<div class="player-top"><span class="player-emoji">${player.emoji}</span><div class="player-identity"><strong>${escapeHtml(player.name)}</strong><small><span class="total-score">${total}</span><span class="score-label">очков</span></small></div></div><div class="recent-scores">${recent}</div>${action}`;
     els.playersGrid.append(card);
@@ -213,7 +213,7 @@ function renderPlayerFields() {
   els.playerFields.innerHTML = "";
   editingPlayers.forEach((player,index) => {
     const row = document.createElement("div"); row.className="player-field";
-    row.innerHTML = `<span>${player.emoji}</span><input value="${escapeHtml(player.name)}" maxlength="24" aria-label="Имя игрока ${index+1}"><button type="button" aria-label="Удалить">×</button>`;
+    row.innerHTML = `<span>${player.emoji}</span><input class="nes-input" value="${escapeHtml(player.name)}" maxlength="24" aria-label="Имя игрока ${index+1}"><button class="nes-btn" type="button" aria-label="Удалить">×</button>`;
     row.querySelector("input").addEventListener("input", event => editingPlayers[index].name=event.target.value);
     row.querySelector("button").addEventListener("click", () => { if (editingPlayers.length<=2) return showToast("Нужно хотя бы два игрока"); editingPlayers.splice(index,1); renderPlayerFields(); });
     els.playerFields.append(row);

@@ -6,25 +6,30 @@
     <meta name="theme-color" content="#eef2ff" />
     <meta name="description" content="Счётчик для игры 101 с подсчётом карт по фото" />
     <title>Сто одно · счёт партии</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./pixel.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="#" aria-label="Сто одно"><span class="brand-mark">101</span><span><b>Сто одно</b><small>счёт партии</small></span></a>
-        <div class="top-actions"><button class="icon-button" id="rulesButton" type="button" aria-label="Правила">?</button><button class="avatar-stack" id="playersButton" type="button" aria-label="Изменить игроков"></button></div>
+        <div class="top-actions"><button class="icon-button nes-btn" id="rulesButton" type="button" aria-label="Правила">?</button><button class="avatar-stack" id="playersButton" type="button" aria-label="Изменить игроков"></button></div>
       </header>
       <main>
         <section class="game-head">
           <div><span class="eyebrow" id="roundLabel">Раунд 1</span><h1 id="gameTitle">Кто вышел?</h1><p id="gameHint">Отметьте победителя раунда — у остальных появится кнопка фото.</p></div>
-          <button class="quiet-button" id="newGameButton" type="button">Новая партия</button>
+          <button class="quiet-button nes-btn is-warning" id="newGameButton" type="button">Новая партия</button>
         </section>
-        <section class="leader-card" id="leaderCard" hidden><span class="leader-emoji" id="leaderEmoji"></span><span><small>Сейчас впереди</small><strong id="leaderName"></strong></span><b id="leaderScore"></b></section>
+        <section class="leader-card nes-container" id="leaderCard" hidden><span class="leader-emoji" id="leaderEmoji"></span><span><small>Сейчас впереди</small><strong id="leaderName"></strong></span><b id="leaderScore"></b></section>
         <section class="players-grid" id="playersGrid" aria-live="polite"></section>
-        <section class="round-ready" id="roundReady" hidden><div><span>✓</span><strong>Раунд посчитан</strong><small>Все очки записаны в историю</small></div><button class="primary-button" id="nextRoundButton" type="button">Следующий раунд <span>→</span></button></section>
+        <section class="round-ready nes-container is-dark" id="roundReady" hidden><div><span>✓</span><strong>Раунд посчитан</strong><small>Все очки записаны в историю</small></div><button class="primary-button nes-btn is-success" id="nextRoundButton" type="button">Следующий раунд <span>→</span></button></section>
         <section class="history-section" id="historySection" hidden>
           <div class="section-title"><div><span class="eyebrow">Партия</span><h2>История очков</h2></div><button class="text-button" id="toggleHistoryButton" type="button" aria-expanded="true">Свернуть</button></div>
-          <div class="history-wrap" id="historyWrap"><table id="historyTable"></table></div>
+          <div class="history-wrap" id="historyWrap"><table class="nes-table is-bordered is-centered" id="historyTable"></table></div>
         </section>
       </main>
       <footer><span>Фото остаётся на устройстве</span><a href="https://huggingface.co/sroot/lgd-cards-gen3" target="_blank" rel="noreferrer">Открытая модель распознавания</a></footer>
@@ -33,30 +38,30 @@
     <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
 
     <dialog class="sheet" id="playersDialog">
-      <form method="dialog" class="sheet-card" id="playersForm">
+      <form method="dialog" class="sheet-card nes-container" id="playersForm">
         <div class="sheet-handle"></div>
         <div class="sheet-heading"><div><span class="eyebrow">Состав</span><h2>Игроки</h2></div><button class="close-button" id="playersClose" type="button" aria-label="Закрыть">×</button></div>
         <p class="sheet-copy">Имена и случайные талисманы запоминаются на этом устройстве.</p>
         <div class="player-fields" id="playerFields"></div>
-        <button class="add-player-button" id="addPlayerButton" type="button">＋ Добавить игрока</button>
-        <button class="primary-button full" id="savePlayersButton" type="submit" value="default">Сохранить состав</button>
+        <button class="add-player-button nes-btn" id="addPlayerButton" type="button">＋ Добавить игрока</button>
+        <button class="primary-button full nes-btn is-primary" id="savePlayersButton" type="submit" value="default">Сохранить состав</button>
       </form>
     </dialog>
 
     <dialog class="sheet" id="reviewDialog">
-      <form method="dialog" class="sheet-card review-card" id="reviewForm">
+      <form method="dialog" class="sheet-card review-card nes-container" id="reviewForm">
         <div class="sheet-handle"></div>
         <div class="review-person"><span id="reviewEmoji"></span><div><small>Карты игрока</small><strong id="reviewName"></strong></div><button class="close-button" id="reviewClose" type="button" aria-label="Закрыть">×</button></div>
         <div class="model-state" id="modelState"><span class="spinner"></span><strong id="modelStateTitle">Ищу карты на фото…</strong><small id="modelStateCopy">Первый раз модель может загружаться чуть дольше</small></div>
         <div id="reviewResult" hidden>
           <div class="review-total"><span><small>Найдено</small><b id="reviewCount">0 карт</b></span><strong><b id="reviewScore">0</b> очков</strong></div>
           <div class="notice" id="queenNotice" hidden></div><div class="detected-cards" id="detectedCards"></div>
-          <button class="add-card-button" id="addCardButton" type="button">＋ Добавить карту</button><button class="primary-button full" id="confirmScoreButton" type="button">Записать очки</button>
+          <button class="add-card-button nes-btn" id="addCardButton" type="button">＋ Добавить карту</button><button class="primary-button full nes-btn is-primary" id="confirmScoreButton" type="button">Записать очки</button>
         </div>
       </form>
     </dialog>
 
-    <dialog class="rules-dialog" id="rulesDialog">
+    <dialog class="rules-dialog nes-container" id="rulesDialog">
       <button class="close-button" id="rulesClose" type="button" aria-label="Закрыть">×</button><span class="eyebrow">Подсчёт карт</span><h2>Правила</h2>
       <div class="rules-grid"><span><b>6–8, 10</b><small>по номиналу</small></span><span><b>9</b><small>0 очков</small></span><span><b>В</b><small>2 очка</small></span><span><b>Д</b><small>3 очка</small></span><span><b>К</b><small>4 очка</small></span><span><b>Т</b><small>11 очков</small></span></div>
       <p class="queen-rule">Одна оставшаяся дама: <b>♠ 40</b>, любая другая — <b>20</b>.</p>

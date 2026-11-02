@@ -1,0 +1,139 @@
+:root {
+  --ink: #1a1c2c;
+  --muted: #5d6680;
+  --paper: #fffdf4;
+  --bg: #f7efcf;
+  --line: #1a1c2c;
+  --violet: #3b5dc9;
+  --violet-dark: #29366f;
+  --violet-soft: #d6e1ff;
+  --mint: #c7f0d8;
+  --green: #257953;
+  --red: #b13e53;
+  --pixel-font: "Press Start 2P", ui-monospace, monospace;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(90deg, rgba(26,28,44,.045) 1px, transparent 1px),
+    linear-gradient(rgba(26,28,44,.045) 1px, transparent 1px);
+  background-size: 16px 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+button, .brand-mark, .eyebrow, h1, h2, .total-score, .score-chip,
+.round-ready strong, .leader-card small, th, .review-total strong b {
+  font-family: var(--pixel-font);
+}
+
+.app-shell { width: min(100%, 920px); }
+.topbar { height: 92px; border-bottom: 4px solid var(--ink); }
+.brand { gap: 16px; }
+.brand-mark {
+  width: 54px; height: 54px; border: 4px solid var(--ink); border-radius: 0;
+  background: #3b5dc9; font-size: 12px; transform: none;
+  box-shadow: 6px 6px 0 #94b0ff;
+}
+.brand b { font-family: var(--pixel-font); font-size: 11px; line-height: 1.5; }
+.brand small { margin-top: 3px; color: var(--muted); font-size: 10px; }
+.icon-button.nes-btn { width: 42px; height: 42px; padding: 0; border-radius: 0; font-size: 13px; }
+.avatar-stack span { width: 34px; height: 34px; border: 3px solid var(--ink); border-radius: 0; background: var(--paper); }
+
+.game-head { padding-top: 48px; }
+.eyebrow { color: var(--violet); font-size: 9px; line-height: 1.7; }
+h1 { margin-top: 14px; font-size: clamp(24px, 4.5vw, 38px); line-height: 1.4; letter-spacing: -.04em; }
+h2 { margin-top: 12px; font-size: 21px; line-height: 1.5; }
+.game-head p { max-width: 610px; color: var(--muted); font-size: 13px; }
+.quiet-button.nes-btn { padding: 10px 12px; border: 0; color: var(--ink); font-size: 9px; }
+
+.leader-card.nes-container {
+  padding: 13px 17px; border-radius: 0; border-color: var(--ink);
+  background: #d6e1ff; box-shadow: 6px 6px 0 #94b0ff;
+}
+.leader-emoji, .player-emoji, .review-person > span {
+  border: 3px solid var(--ink); border-radius: 0; background: var(--paper);
+  image-rendering: pixelated;
+}
+.leader-card small { font-size: 7px; }
+.leader-card > b { font-family: var(--pixel-font); color: var(--ink); font-size: 18px; }
+
+.players-grid { gap: 20px; }
+.player-card.nes-container {
+  padding: 18px; border-radius: 0; border-color: var(--ink); background: var(--paper);
+  box-shadow: 8px 8px 0 #aeb8d3;
+}
+.player-card.nes-container.winner { border-color: var(--ink); background: #edfff5; box-shadow: 8px 8px 0 #63c99b; }
+.player-identity strong { font-size: 16px; }
+.total-score { font-size: 25px; }
+.score-label { color: var(--muted); font-size: 9px; }
+.recent-scores { margin-top: 18px; }
+.score-chip { min-width: 29px; height: 27px; border: 2px solid var(--ink); border-radius: 0; background: #dbe0ef; color: var(--ink); font-size: 8px; }
+.score-chip.zero { color: var(--ink); background: #8bd4ad; }
+.no-history { color: var(--muted); }
+
+.player-action.nes-btn, .add-player-button.nes-btn, .add-card-button.nes-btn,
+.primary-button.nes-btn, .queen-exit.nes-btn {
+  border-radius: 0; font-size: 9px; line-height: 1.6;
+}
+.player-action.nes-btn { min-height: 48px; width: 100%; }
+.exit-button.nes-btn { color: var(--ink); background: #f6d6a7; }
+.winner-label { border: 3px solid var(--ink); border-radius: 0; color: var(--ink); background: #8bd4ad; font-size: 11px; }
+.winner-label span { border-radius: 0; background: var(--ink); }
+.queen-exit.nes-btn { min-width: 58px; color: #fff; background: var(--red); }
+.queen-exit.nes-btn.selected { color: #fff; background: #7a2841; transform: translate(2px,2px); box-shadow: inset 4px 4px #4d1d2d; }
+.round-score { min-height: 48px; border: 3px solid var(--ink); border-radius: 0; background: #dbe0ef; }
+.round-score button { font-family: var(--pixel-font); font-size: 7px; }
+
+.round-ready.nes-container.is-dark { margin-top: 24px; padding: 18px; border-radius: 0; color: #fff; background: #29366f; box-shadow: 8px 8px 0 #94b0ff; }
+.round-ready small { font-size: 11px; }
+.primary-button.nes-btn { color: #fff; background: #257953; }
+
+.history-section { border-top: 4px solid var(--ink); }
+.text-button { font-family: var(--pixel-font); color: var(--violet); font-size: 8px; }
+.history-wrap { border: 0; border-radius: 0; background: transparent; overflow: auto; padding: 4px 6px 8px 4px; }
+.nes-table { width: 100%; margin: 0; background: var(--paper); box-shadow: 6px 6px 0 #aeb8d3; }
+.nes-table th { color: var(--ink); font-size: 7px; line-height: 1.7; background: #d6e1ff; }
+.nes-table td { border-color: var(--ink); }
+.winner-cell { color: var(--ink); background: #c7f0d8; }
+footer { border-top: 4px solid var(--ink); color: var(--muted); }
+
+dialog::backdrop { background: rgba(26,28,44,.72); backdrop-filter: none; }
+.sheet-card.nes-container, .rules-dialog.nes-container {
+  border-radius: 0; border-color: var(--ink); background: var(--paper);
+  box-shadow: 10px 10px 0 #94b0ff;
+}
+.sheet-handle { display: none; }
+.close-button { border: 3px solid var(--ink); border-radius: 0; color: var(--ink); background: #f6d6a7; font-family: var(--pixel-font); font-size: 12px; }
+.player-field { padding: 0; border: 0; border-radius: 0; }
+.player-field > span { width: 46px; }
+.player-field .nes-input { height: 46px; padding: 8px; border-radius: 0; font-family: inherit; font-size: 13px; }
+.player-field .nes-btn { width: 38px; height: 38px; padding: 0; font-size: 10px; }
+.sheet-copy { color: var(--muted); }
+.add-player-button.nes-btn, .add-card-button.nes-btn { width: 100%; color: var(--ink); background: #f6d6a7; }
+.primary-button.full.nes-btn { width: 100%; color: #fff; background: #3b5dc9; }
+.review-person { border-bottom: 4px solid var(--ink); }
+.review-person small { font-family: var(--pixel-font); font-size: 7px; }
+.review-total strong b { font-size: 25px; }
+.card-editor { border: 3px solid var(--ink); border-radius: 0; background: #fff; }
+.remove-card { border: 2px solid var(--ink); border-radius: 0; color: var(--ink); background: #f6d6a7; }
+.notice, .queen-rule { border: 3px solid var(--ink); border-radius: 0; color: var(--ink); background: #f6d6a7; }
+.rules-grid span { border: 3px solid var(--ink); border-radius: 0; background: #d6e1ff; }
+.toast { border: 4px solid #fff; border-radius: 0; background: var(--ink); font-family: var(--pixel-font); font-size: 8px; box-shadow: 6px 6px 0 rgba(26,28,44,.35); }
+
+@media (max-width: 650px) {
+  .topbar { height: 78px; }
+  .brand-mark { width: 46px; height: 46px; box-shadow: 4px 4px 0 #94b0ff; }
+  .brand b { font-size: 9px; }
+  .game-head { padding-top: 32px; }
+  h1 { font-size: 23px; }
+  .game-head p { font-size: 12px; }
+  .players-grid { gap: 16px; }
+  .player-card.nes-container { box-shadow: 6px 6px 0 #aeb8d3; }
+  .sheet-card.nes-container { padding: 20px 16px calc(20px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 390px) {
+  .winner-actions { grid-template-columns: 1fr 54px 54px; }
+  .queen-exit.nes-btn { min-width: 0; padding-left: 5px; padding-right: 5px; }
+}
