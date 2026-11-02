@@ -418,3 +418,11 @@ dialog::backdrop { background: rgba(23,30,38,.58); backdrop-filter: blur(2px); }
   .queen-exit { min-width: 30px; width: 30px; font-size: 9px; }
   .round-score { width: 67px; }
 }
+
+/* Keep the space above the score sheet functional and compact. */
+.game-head { justify-content: flex-end; padding: 12px 0 10px; }
+footer { justify-content: flex-end; }
+
+@media (max-width: 650px) {
+  .game-head { padding: 10px 0 8px; }
+}

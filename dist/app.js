@@ -56,10 +56,7 @@ function currentComplete() {
 function render() {
   const roundNumber = game.rounds.length + 1;
   const winner = players.find(player => player.id === game.current.winnerId);
-  $("#roundLabel").textContent = `Раунд ${roundNumber}`;
   $("#sheetRoundLabel").textContent = `Раунд ${roundNumber}`;
-  $("#gameTitle").textContent = winner ? `${winner.name} вышел${winner.name.endsWith("а") ? "а" : ""}` : "Кто вышел?";
-  $("#gameHint").textContent = winner ? "Теперь сфотографируйте оставшиеся карты каждого игрока." : "Отметьте победителя раунда — у остальных появится кнопка фото.";
   els.playersButton.innerHTML = players.slice(0,4).map(player => `<span>${player.emoji}</span>`).join("");
   els.playersGrid.innerHTML = "";
 
@@ -293,8 +290,6 @@ $("#confirmScoreButton").addEventListener("click",()=>{if(!reviewingPlayerId)ret
 $("#addCardButton").addEventListener("click",()=>{currentCards.push({rank:"6",suit:"?"});renderReview()});
 $("#nextRoundButton").addEventListener("click",nextRound);
 $("#newGameButton").addEventListener("click",newGame);
-$("#rulesButton").addEventListener("click",()=>$("#rulesDialog").showModal());
-$("#rulesClose").addEventListener("click",()=>$("#rulesDialog").close());
 $("#toggleHistoryButton").addEventListener("click",event=>{const wrap=$("#historyWrap"),hidden=wrap.hidden;wrap.hidden=!hidden;event.currentTarget.textContent=hidden?"Свернуть":"Развернуть";event.currentTarget.setAttribute("aria-expanded",String(hidden))});
 
 render();

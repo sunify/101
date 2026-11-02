@@ -13,11 +13,10 @@
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="#" aria-label="Сто одно"><span class="brand-mark">101</span><span><b>Сто одно</b><small>счёт партии</small></span></a>
-        <div class="top-actions"><button class="icon-button" id="rulesButton" type="button" aria-label="Правила">?</button><button class="avatar-stack" id="playersButton" type="button" aria-label="Изменить игроков"></button></div>
+        <div class="top-actions"><button class="avatar-stack" id="playersButton" type="button" aria-label="Изменить игроков"></button></div>
       </header>
       <main>
         <section class="game-head">
-          <div><span class="eyebrow" id="roundLabel">Раунд 1</span><h1 id="gameTitle">Кто вышел?</h1><p id="gameHint">Отметьте победителя раунда — у остальных появится кнопка фото.</p></div>
           <button class="quiet-button" id="newGameButton" type="button">Новая партия</button>
         </section>
         <section class="score-sheet">
@@ -31,7 +30,7 @@
           <div class="history-wrap" id="historyWrap"><table id="historyTable"></table></div>
         </section>
       </main>
-      <footer><span>Фото остаётся на устройстве</span><a href="https://huggingface.co/sroot/lgd-cards-gen3" target="_blank" rel="noreferrer">Открытая модель распознавания</a></footer>
+      <footer><a href="https://huggingface.co/sroot/lgd-cards-gen3" target="_blank" rel="noreferrer">Открытая модель распознавания</a></footer>
     </div>
 
     <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
@@ -60,11 +59,6 @@
       </form>
     </dialog>
 
-    <dialog class="rules-dialog" id="rulesDialog">
-      <button class="close-button" id="rulesClose" type="button" aria-label="Закрыть">×</button><span class="eyebrow">Подсчёт карт</span><h2>Правила</h2>
-      <div class="rules-grid"><span><b>6–8, 10</b><small>по номиналу</small></span><span><b>9</b><small>0 очков</small></span><span><b>В</b><small>2 очка</small></span><span><b>Д</b><small>3 очка</small></span><span><b>К</b><small>4 очка</small></span><span><b>Т</b><small>11 очков</small></span></div>
-      <p class="queen-rule">Одна оставшаяся дама: <b>♠ 40</b>, любая другая — <b>20</b>.</p>
-    </dialog>
     <div class="toast" id="toast" role="status"></div>
     <script src="./vendor/onnxruntime/ort.wasm.min.js"></script><script src="./app.js"></script>
   </body>
